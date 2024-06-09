@@ -13,8 +13,17 @@ import java.util.List;
 @Service
 public class EmployeeService {
     private static final int COUNT = 20;
-    private final List<Employee> employees = new ArrayList<>(COUNT);
-
+    private final List<Employee> employees = new ArrayList<>(List.of(
+            new Employee("Петр", "Васильев"),
+            new Employee("Алекандр", "Пушкин"),
+            new Employee("Иван", "Иванов"),
+            new Employee("Ольга", "Петрова"),
+            new Employee("Михаил", "Сидоров"),
+            new Employee("Мария", "Прокоенко"),
+            new Employee("Корнелий ", "Соколов"),
+            new Employee("Любовь", "Полякова"),
+            new Employee("Кристина", "Тереньтьева"),
+            new Employee("Леонтий", "Федосеев")));
 
     public void add(String firstName, String lostName) {
         if (employees.size() >= COUNT) {
