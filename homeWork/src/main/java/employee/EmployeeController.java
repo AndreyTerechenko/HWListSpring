@@ -17,24 +17,24 @@ public class EmployeeController {
     }
 
 
-    @GetMapping(path = "/add")
+    @GetMapping("/add")
     public void add(@RequestParam String firstName, @RequestParam String lostName) {
         employeeService.add(firstName, lostName);
     }
 
-    @GetMapping(path = "/remove")
+    @GetMapping("/remove")
     public void remove(@RequestParam String firstName, @RequestParam String lostName) {
 
         employeeService.remove(firstName, lostName);
     }
 
 
-    @GetMapping(path = "/find")
+    @GetMapping("/find")
     public Employee find(@RequestParam String firstName, @RequestParam String lostName) {
         return employeeService.find(firstName, lostName);
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping("/all")
     public Employee all() {
         return all();
     }
