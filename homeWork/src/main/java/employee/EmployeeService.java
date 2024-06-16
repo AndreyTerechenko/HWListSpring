@@ -5,60 +5,48 @@ import exeptions.ExeptionMaxEmployees;
 import exeptions.ExeptionNotFound;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Service
 public class EmployeeService {
-    private static final int COUNT = 20;
-    private final List<Employee> employees = new ArrayList<>(List.of(
-            new Employee("Петр", "Васильев"),
-            new Employee("Алекандр", "Пушкин"),
-            new Employee("Иван", "Иванов"),
-            new Employee("Ольга", "Петрова"),
-            new Employee("Михаил", "Сидоров"),
-            new Employee("Мария", "Прокоенко"),
-            new Employee("Корнелий ", "Соколов"),
-            new Employee("Любовь", "Полякова"),
-            new Employee("Кристина", "Тереньтьева"),
-            new Employee("Леонтий", "Федосеев")));
+    private static final int MAX_COUNT = 15;
+    private final Map<String, Employee> employees = new HashMap<>(MAX_COUNT);
 
     public void add(String firstName, String lostName) {
-        if (employees.size() >= COUNT) {
+        if (employees.size() >= MAX_COUNT) {
             throw new ExeptionMaxEmployees();
         }
         Employee employee = find(firstName, lostName);
-        if (employee != null) {
+        if (employees.containsKey(employee)) {
             throw new ExeptionHasAlready();
         }
-        employees.add(new Employee(firstName, lostName));
+        var key = (firstName + "_" + lostName).toLowerCase();
+        employees.put(key, employee);
     }
 
     public void remove(String firstName, String lostName) {
-        for (Employee employee : employees) {
-            if (employee.getFirstName().equals(firstName) && employee.getLostName().equals(lostName)) ;
-            {
-                employees.remove(employee);
-            }
+        var key = (firstName + "_" + lostName).toLowerCase();
+        if (employees.containsKey(key)) {
+            employees.remove(key);
         }
         throw new ExeptionNotFound();
     }
 
 
     public Employee find(String firstName, String lostName) {
-        for (Employee employee : employees) {
-            if (employee.getFirstName().equals(firstName) && employee.getLostName().equals(lostName)) ;
-            {
-                return employee;
-            }
+        var key = (firstName + "_" + lostName).toLowerCase();
+        if (employees.containsKey(key)) {
+            return employees.get(key);
         }
         throw new ExeptionNotFound();
     }
 
-    public Collection<Employee> all() {
-        return employees;
+    public Collection<Employee> getAll() {
+        return Collections.unmodifiableCollection(employees.values());
     }
 }
 
