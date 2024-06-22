@@ -5,6 +5,8 @@ import java.util.Objects;
 public class Employee {
     private String firstName;
     private String lostName;
+    private double salary;
+    private int department;
 
     public Employee(String firstName, String lostName) {
         this.firstName = firstName;
@@ -17,6 +19,22 @@ public class Employee {
 
     public String getLostName() {
         return lostName;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public int getDepartament() {
+        return department;
+    }
+
+    public void setDepartament(int departament) {
+        this.department = departament;
     }
 
     @Override
