@@ -3,6 +3,7 @@ package employee;
 import exeptions.ExeptionHasAlready;
 import exeptions.ExeptionMaxEmployees;
 import exeptions.ExeptionNotFound;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -17,6 +18,7 @@ public class EmployeeService {
     private final Map<String, Employee> employees = new HashMap<>(MAX_COUNT);
 
     public void add(String firstName, String lostName) {
+        if (StringUtils.isAlpha)
         if (employees.size() >= MAX_COUNT) {
             throw new ExeptionMaxEmployees();
         }
